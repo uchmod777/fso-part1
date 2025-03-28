@@ -3,9 +3,12 @@ import { useState } from "react";
 const StatisticLine = ({ text, statistic, percentSign }) => {
   return (
     <>
-      <p>
-        {text} {statistic} {percentSign ? "%" : ""}
-      </p>
+      <tr>
+        <td>{text}</td>
+        <td>
+          {statistic} {percentSign ? "%" : ""}
+        </td>
+      </tr>
     </>
   );
 };
@@ -19,7 +22,6 @@ const Statistics = ({ good, neutral, bad }) => {
     return (
       <div>
         <h1>Statistics</h1>
-        <br />
         <p>No feedback given</p>
       </div>
     );
@@ -27,17 +29,33 @@ const Statistics = ({ good, neutral, bad }) => {
     return (
       <div>
         <h1>Statistics</h1>
-        <br />
-        <StatisticLine text="good" statistic={good} percentSign={false} />
-        <StatisticLine text="neutral" statistic={neutral} percentSign={false} />
-        <StatisticLine text="bad" statistic={bad} percentSign={false} />
-        <StatisticLine text="all" statistic={all} percentSign={false} />
-        <StatisticLine text="average" statistic={average} percentSign={false} />
-        <StatisticLine
-          text="positive"
-          statistic={positive}
-          percentSign={true}
-        />
+        <table>
+          <tbody>
+            <StatisticLine text="good" statistic={good} percentSign={false} />
+
+            <StatisticLine
+              text="neutral"
+              statistic={neutral}
+              percentSign={false}
+            />
+
+            <StatisticLine text="bad" statistic={bad} percentSign={false} />
+
+            <StatisticLine text="all" statistic={all} percentSign={false} />
+
+            <StatisticLine
+              text="average"
+              statistic={average}
+              percentSign={false}
+            />
+
+            <StatisticLine
+              text="positive"
+              statistic={positive}
+              percentSign={true}
+            />
+          </tbody>
+        </table>
       </div>
     );
   }
@@ -74,11 +92,9 @@ const App = () => {
   return (
     <div>
       <h1>Give feedback</h1>
-      <br />
       <Button type="button" onClick={setValGood} text="good" />
       <Button type="button" onClick={setValNeutral} text="neutral" />
       <Button type="button" onClick={setValBad} text="bad" />
-      <br />
       <Statistics good={good} bad={bad} neutral={neutral} />
     </div>
   );
