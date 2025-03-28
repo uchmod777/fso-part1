@@ -1,5 +1,15 @@
 import { useState } from "react";
 
+const StatisticLine = ({ text, statistic, percentSign }) => {
+  return (
+    <>
+      <p>
+        {text} {statistic} {percentSign ? "%" : ""}
+      </p>
+    </>
+  );
+};
+
 const Statistics = ({ good, neutral, bad }) => {
   const all = good + neutral + bad;
   const average = ((good - bad) / all).toFixed(2);
@@ -18,12 +28,16 @@ const Statistics = ({ good, neutral, bad }) => {
       <div>
         <h1>Statistics</h1>
         <br />
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>all {all}</p>
-        <p>average {average}</p>
-        <p>positive {positive} %</p>
+        <StatisticLine text="good" statistic={good} percentSign={false} />
+        <StatisticLine text="neutral" statistic={neutral} percentSign={false} />
+        <StatisticLine text="bad" statistic={bad} percentSign={false} />
+        <StatisticLine text="all" statistic={all} percentSign={false} />
+        <StatisticLine text="average" statistic={average} percentSign={false} />
+        <StatisticLine
+          text="positive"
+          statistic={positive}
+          percentSign={true}
+        />
       </div>
     );
   }
@@ -41,11 +55,6 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-
-  // const incrementValue = ({ value, setter }) => {
-  //   const incrementedValue = value + 1;
-  //   setter(incrementedValue);
-  // };
 
   const setValGood = () => {
     const newValGood = good + 1;
